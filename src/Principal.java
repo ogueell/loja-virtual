@@ -27,29 +27,40 @@ public class Principal {
         produtos.add(monitor);
 
         Carrinho carrinho = new Carrinho();
-
-        System.out.println("=== Produtos disponíveis ===");
-        for (int i = 0; i < produtos.size(); i++) {
-            Produto produtoAtual = produtos.get(i);
-            System.out.println((i + 1) + " - " + produtoAtual.getNome() + " - R$" + produtoAtual.getPreco());
-
-        }
+        
         Scanner scanner = new Scanner(System.in);
+        boolean continuarComprando = true;
 
-        System.out.println("Escolha o número do produto: ");
-        int escolha = scanner.nextInt();
+        while (continuarComprando) {
 
-        System.out.println("Quantidade desejada: ");
-        int quantidade = scanner.nextInt();
+            System.out.println("=== Produtos disponíveis ===");
+            for (int i = 0; i < produtos.size(); i++) {
+                Produto produtoAtual = produtos.get(i);
+                System.out.println((i + 1) + " - " + produtoAtual.getNome() + " - R$" + produtoAtual.getPreco());
+            }
 
-        Produto produtoEscolhido = produtos.get(escolha - 1);
+            System.out.println("Escolha o número do produto: ");
+            int escolha = scanner.nextInt();
 
-        ItemCarrinho itemCarrinho = new ItemCarrinho();
-        itemCarrinho.setProduto(produtoEscolhido);
-        itemCarrinho.setQuantidade(quantidade);
+            System.out.println("Quantidade desejada: ");
+            int quantidade = scanner.nextInt();
 
-        carrinho.adicionarItem(itemCarrinho);
+            Produto produtoEscolhido = produtos.get(escolha - 1);
 
-        System.out.println("Total: " + carrinho.calcularTotal());
+            ItemCarrinho itemCarrinho = new ItemCarrinho();
+            itemCarrinho.setProduto(produtoEscolhido);
+            itemCarrinho.setQuantidade(quantidade);
+
+            carrinho.adicionarItem(itemCarrinho);
+
+            System.out.println("Deseja continuar comprando? (1 - Sim / 0 - Não)");
+            int resposta = scanner.nextInt();
+
+            if (resposta == 0) {
+                continuarComprando = false;
+            }
+        }
+
+        System.out.println("Total da compra: " + carrinho.calcularTotal());
     }
 }
