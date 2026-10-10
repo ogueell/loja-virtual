@@ -7,20 +7,11 @@ public class Principal {
 
         List<Produto> produtos = new ArrayList<>();
 
-        Produto teclado = new Produto();
-        teclado.setNome("Teclado");
-        teclado.setPreco(150.00);
-        teclado.setQuantidade(10);
+        Produto teclado = new Produto("Teclado", 150.00, 10);
 
-        Produto mouse = new Produto();
-        mouse.setNome("Mouse");
-        mouse.setPreco(50.00);
-        mouse.setQuantidade(5);
+        Produto mouse = new Produto("Mouse", 50.00, 5);
 
-        Produto monitor = new Produto();
-        monitor.setNome("Monitor");
-        monitor.setPreco(300.00);
-        monitor.setQuantidade(10);
+        Produto monitor = new Produto("Monitor", 300.00, 10);
 
         produtos.add(teclado);
         produtos.add(mouse);
