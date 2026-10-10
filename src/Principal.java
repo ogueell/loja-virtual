@@ -38,11 +38,17 @@ public class Principal {
 
             Produto produtoEscolhido = produtos.get(escolha - 1);
 
-            ItemCarrinho itemCarrinho = new ItemCarrinho();
-            itemCarrinho.setProduto(produtoEscolhido);
-            itemCarrinho.setQuantidade(quantidade);
+            if (produtoEscolhido.possuiEstoque(quantidade)) {
+                ItemCarrinho itemCarrinho = new ItemCarrinho();
 
-            carrinho.adicionarItem(itemCarrinho);
+                produtoEscolhido.reduzirEstoque(quantidade);
+                itemCarrinho.setProduto(produtoEscolhido);
+                itemCarrinho.setQuantidade(quantidade);
+
+                carrinho.adicionarItem(itemCarrinho);
+            } else {
+                System.out.println("\nQuantidade solicitada não disponível em estoque.\n");
+            }
 
             System.out.println("Deseja continuar comprando? (1 - Sim / 0 - Não)");
             int resposta = scanner.nextInt();
