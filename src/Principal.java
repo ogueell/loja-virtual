@@ -18,7 +18,7 @@ public class Principal {
         produtos.add(monitor);
 
         Carrinho carrinho = new Carrinho();
-        
+
         Scanner scanner = new Scanner(System.in);
         boolean continuarComprando = true;
 
@@ -40,12 +40,9 @@ public class Principal {
 
             try {
                 if (produtoEscolhido.possuiEstoque(quantidade)) {
-                    ItemCarrinho itemCarrinho = new ItemCarrinho();
-
                     produtoEscolhido.reduzirEstoque(quantidade);
 
-                    itemCarrinho.setProduto(produtoEscolhido);
-                    itemCarrinho.setQuantidade(quantidade);
+                    ItemCarrinho itemCarrinho = new ItemCarrinho(produtoEscolhido, quantidade);
 
                     carrinho.adicionarItem(itemCarrinho);
                 } else {
