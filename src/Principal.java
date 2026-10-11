@@ -30,16 +30,36 @@ public class Principal {
                 System.out.println((i + 1) + " - " + produtoAtual.getNome() + " - R$" + produtoAtual.getPreco());
             }
 
-            System.out.println("Escolha o número do produto: ");
-            int escolha = scanner.nextInt();
+            int escolha;
 
-            while (escolha < 1 || escolha > produtos.size()) {
-                System.out.println("Produto inválido. Escolha uma opção entre 1 e "
-                        + produtos.size() + ":");
+            while (true) {
+                System.out.println("Escolha o número do produto: ");
+
+                if (!scanner.hasNextInt()) {
+                    System.out.println("Digite um número inteiro.");
+                    scanner.next();
+                    continue;
+                }
+
                 escolha = scanner.nextInt();
+
+                if (escolha >= 1 && escolha <= produtos.size()) {
+                    break;
+                }
+
+                System.out.println(
+                        "Produto inválido. Escolha uma opção entre 1 e "
+                                + produtos.size() + "."
+                );
             }
 
             System.out.println("Quantidade desejada: ");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Digite uma quantidade inteira.");
+                scanner.next();
+            }
+
             int quantidade = scanner.nextInt();
 
             Produto produtoEscolhido = produtos.get(escolha - 1);
@@ -62,7 +82,24 @@ public class Principal {
             }
 
             System.out.println("Deseja continuar comprando? (1 - Sim / 0 - Não)");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Digite 1 para continuar ou 0 para finalizar.");
+                scanner.next();
+            }
+
             int resposta = scanner.nextInt();
+
+            while (resposta != 0 && resposta != 1) {
+                System.out.println("Opção inválida. Digite 1 para continuar ou 0 para finalizar.");
+
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Digite 1 para continuar ou 0 para finalizar.");
+                    scanner.next();
+                }
+
+                resposta = scanner.nextInt();
+            }
 
             if (resposta == 0) {
                 continuarComprando = false;
