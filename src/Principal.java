@@ -38,16 +38,24 @@ public class Principal {
 
             Produto produtoEscolhido = produtos.get(escolha - 1);
 
-            if (produtoEscolhido.possuiEstoque(quantidade)) {
-                ItemCarrinho itemCarrinho = new ItemCarrinho();
+            try {
+                if (produtoEscolhido.possuiEstoque(quantidade)) {
+                    ItemCarrinho itemCarrinho = new ItemCarrinho();
 
-                produtoEscolhido.reduzirEstoque(quantidade);
-                itemCarrinho.setProduto(produtoEscolhido);
-                itemCarrinho.setQuantidade(quantidade);
+                    produtoEscolhido.reduzirEstoque(quantidade);
 
-                carrinho.adicionarItem(itemCarrinho);
-            } else {
-                System.out.println("\nQuantidade solicitada não disponível em estoque.\n");
+                    itemCarrinho.setProduto(produtoEscolhido);
+                    itemCarrinho.setQuantidade(quantidade);
+
+                    carrinho.adicionarItem(itemCarrinho);
+                } else {
+                    System.out.println(
+                            "Quantidade solicitada não disponível em estoque."
+                    );
+                }
+            } catch (IllegalArgumentException erro) {
+                System.out.println("Não foi possível realizar a compra.");
+                System.out.println(erro.getMessage());
             }
 
             System.out.println("Deseja continuar comprando? (1 - Sim / 0 - Não)");
