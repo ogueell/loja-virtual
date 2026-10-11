@@ -8,11 +8,10 @@ public class Carrinho {
         return itens;
     }
 
-    public void setItens(List<ItemCarrinho> itens) {
-        this.itens = itens;
-    }
-
     public void adicionarItem(ItemCarrinho item) {
+        if (item == null) {
+            throw new IllegalArgumentException("Item não pode ser nulo.");
+        }
         itens.add(item);
     }
 
