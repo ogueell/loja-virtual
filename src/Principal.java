@@ -33,6 +33,12 @@ public class Principal {
             System.out.println("Escolha o número do produto: ");
             int escolha = scanner.nextInt();
 
+            while (escolha < 1 || escolha > produtos.size()) {
+                System.out.println("Produto inválido. Escolha uma opção entre 1 e "
+                        + produtos.size() + ":");
+                escolha = scanner.nextInt();
+            }
+
             System.out.println("Quantidade desejada: ");
             int quantidade = scanner.nextInt();
 
