@@ -22,12 +22,7 @@ public class Principal {
 
         while (continuarComprando) {
 
-            System.out.println("=== Produtos disponíveis ===");
-
-            for (int i = 0; i < produtos.size(); i++) {
-                Produto produtoAtual = produtos.get(i);
-                System.out.println((i + 1) + " - " + produtoAtual.getNome() + " - R$" + produtoAtual.getPreco());
-            }
+            exibirProdutos(produtos);
 
             int escolha;
 
@@ -86,6 +81,15 @@ public class Principal {
             }
 
             return scanner.nextInt();
+        }
+    }
+
+    private static void exibirProdutos(List<Produto> produtos) {
+        System.out.println("=== Produtos disponíveis ===");
+
+        for (int i = 0; i < produtos.size(); i++) {
+            Produto produtoAtual = produtos.get(i);
+            System.out.println((i + 1) + " - " + produtoAtual.getNome() + " - R$" + produtoAtual.getPreco());
         }
     }
 }
