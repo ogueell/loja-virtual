@@ -8,9 +8,7 @@ public class Principal {
         List<Produto> produtos = new ArrayList<>();
 
         Produto teclado = new Produto("Teclado", 150.00, 10);
-
         Produto mouse = new Produto("Mouse", 50.00, 5);
-
         Produto monitor = new Produto("Monitor", 300.00, 10);
 
         produtos.add(teclado);
@@ -25,6 +23,7 @@ public class Principal {
         while (continuarComprando) {
 
             System.out.println("=== Produtos disponíveis ===");
+
             for (int i = 0; i < produtos.size(); i++) {
                 Produto produtoAtual = produtos.get(i);
                 System.out.println((i + 1) + " - " + produtoAtual.getNome() + " - R$" + produtoAtual.getPreco());
@@ -33,34 +32,16 @@ public class Principal {
             int escolha;
 
             while (true) {
-                System.out.println("Escolha o número do produto: ");
-
-                if (!scanner.hasNextInt()) {
-                    System.out.println("Digite um número inteiro.");
-                    scanner.next();
-                    continue;
-                }
-
-                escolha = scanner.nextInt();
+                escolha = lerInteiro(scanner, "Escolha o número do produto: ");
 
                 if (escolha >= 1 && escolha <= produtos.size()) {
                     break;
                 }
 
-                System.out.println(
-                        "Produto inválido. Escolha uma opção entre 1 e "
-                                + produtos.size() + "."
-                );
+                System.out.println("Produto inválido. Escolha uma opção entre 1 e " + produtos.size() + ".");
             }
 
-            System.out.println("Quantidade desejada: ");
-
-            while (!scanner.hasNextInt()) {
-                System.out.println("Digite uma quantidade inteira.");
-                scanner.next();
-            }
-
-            int quantidade = scanner.nextInt();
+            int quantidade = lerInteiro(scanner, "Quantidade desejada: ");
 
             Produto produtoEscolhido = produtos.get(escolha - 1);
 
@@ -72,33 +53,18 @@ public class Principal {
 
                     carrinho.adicionarItem(itemCarrinho);
                 } else {
-                    System.out.println(
-                            "Quantidade solicitada não disponível em estoque."
-                    );
+                    System.out.println("Quantidade solicitada não disponível em estoque.");
                 }
             } catch (IllegalArgumentException erro) {
                 System.out.println("Não foi possível realizar a compra.");
                 System.out.println(erro.getMessage());
             }
 
-            System.out.println("Deseja continuar comprando? (1 - Sim / 0 - Não)");
-
-            while (!scanner.hasNextInt()) {
-                System.out.println("Digite 1 para continuar ou 0 para finalizar.");
-                scanner.next();
-            }
-
-            int resposta = scanner.nextInt();
+            int resposta = lerInteiro(scanner, "Deseja continuar comprando? (1 - Sim / 0 - Não)");
 
             while (resposta != 0 && resposta != 1) {
                 System.out.println("Opção inválida. Digite 1 para continuar ou 0 para finalizar.");
-
-                while (!scanner.hasNextInt()) {
-                    System.out.println("Digite 1 para continuar ou 0 para finalizar.");
-                    scanner.next();
-                }
-
-                resposta = scanner.nextInt();
+                resposta = lerInteiro(scanner, "Deseja continuar comprando? (1 - Sim / 0 - Não)");
             }
 
             if (resposta == 0) {
@@ -107,5 +73,19 @@ public class Principal {
         }
 
         System.out.println("Total da compra: " + carrinho.calcularTotal());
+    }
+
+    private static int lerInteiro(Scanner scanner, String mensagem) {
+        while (true) {
+            System.out.println(mensagem);
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Digite um número inteiro.");
+                scanner.next();
+                continue;
+            }
+
+            return scanner.nextInt();
+        }
     }
 }
