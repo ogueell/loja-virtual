@@ -24,17 +24,7 @@ public class Principal {
 
             exibirProdutos(produtos);
 
-            int escolha;
-
-            while (true) {
-                escolha = lerInteiro(scanner, "Escolha o número do produto: ");
-
-                if (escolha >= 1 && escolha <= produtos.size()) {
-                    break;
-                }
-
-                System.out.println("Produto inválido. Escolha uma opção entre 1 e " + produtos.size() + ".");
-            }
+            int escolha = escolherProduto(scanner, produtos.size());
 
             int quantidade = lerInteiro(scanner, "Quantidade desejada: ");
 
@@ -90,6 +80,18 @@ public class Principal {
         for (int i = 0; i < produtos.size(); i++) {
             Produto produtoAtual = produtos.get(i);
             System.out.println((i + 1) + " - " + produtoAtual.getNome() + " - R$" + produtoAtual.getPreco());
+        }
+    }
+
+    private static int escolherProduto(Scanner scanner, int quantidadeProdutos) {
+        while (true) {
+            int escolha = lerInteiro(scanner, "Escolha o número do produto: ");
+
+            if (escolha >= 1 && escolha <= quantidadeProdutos) {
+                return escolha;
+            }
+
+            System.out.println("Produto inválido. Escolha uma opção entre 1 e " + quantidadeProdutos + ".");
         }
     }
 }
