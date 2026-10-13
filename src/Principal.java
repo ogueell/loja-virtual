@@ -1,15 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.math.BigDecimal;
 
 public class Principal {
     public static void main(String[] args) {
 
         List<Produto> produtos = new ArrayList<>();
 
-        Produto teclado = new Produto("Teclado", 150.00, 10);
-        Produto mouse = new Produto("Mouse", 50.00, 5);
-        Produto monitor = new Produto("Monitor", 300.00, 10);
+        Produto teclado = new Produto("Teclado", new BigDecimal("150.00"), 10);
+        Produto mouse = new Produto("Mouse", new BigDecimal("50.00"), 5);
+        Produto monitor = new Produto("Monitor", new BigDecimal("300.00"), 10);
 
         produtos.add(teclado);
         produtos.add(mouse);

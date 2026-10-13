@@ -1,13 +1,18 @@
+import java.math.BigDecimal;
+
 public class Produto {
     private String nome;
-    private double preco;
+    private BigDecimal preco;
     private int quantidade;
 
-    public Produto(String nome, double preco, int quantidade) {
+    public Produto(String nome, BigDecimal preco, int quantidade) {
         if (nome == null || nome.isBlank()) {
             throw new IllegalArgumentException("Nome do produto não pode ser nulo ou vazio.");
         }
-        if (preco < 0) {
+        if (preco == null) {
+            throw new IllegalArgumentException("Preço do produto não pode ser nulo.");
+        }
+        if (preco.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Preço do produto não pode ser negativo.");
         }
         if (quantidade < 0) {
@@ -26,7 +31,7 @@ public class Produto {
         return quantidade;
     }
 
-    public double getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 

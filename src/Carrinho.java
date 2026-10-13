@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,14 +13,15 @@ public class Carrinho {
         if (item == null) {
             throw new IllegalArgumentException("Item não pode ser nulo.");
         }
+
         itens.add(item);
     }
 
-    public double calcularTotal() {
-        double total = 0;
+    public BigDecimal calcularTotal() {
+        BigDecimal total = BigDecimal.ZERO;
 
         for (ItemCarrinho item : itens) {
-            total = total + item.calcularSubtotal();
+            total = total.add(item.calcularSubtotal());
         }
 
         return total;
