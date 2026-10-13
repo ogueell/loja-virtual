@@ -32,16 +32,7 @@ public class Principal {
 
             processarCompra(produtoEscolhido, quantidade, carrinho);
 
-            int resposta = lerInteiro(scanner, "Deseja continuar comprando? (1 - Sim / 0 - Não)");
-
-            while (resposta != 0 && resposta != 1) {
-                System.out.println("Opção inválida. Digite 1 para continuar ou 0 para finalizar.");
-                resposta = lerInteiro(scanner, "Deseja continuar comprando? (1 - Sim / 0 - Não)");
-            }
-
-            if (resposta == 0) {
-                continuarComprando = false;
-            }
+            continuarComprando = desejaContinuarComprando(scanner);
         }
 
         System.out.println("Total da compra: " + carrinho.calcularTotal());
@@ -96,6 +87,22 @@ public class Principal {
         } catch (IllegalArgumentException erro) {
             System.out.println("Não foi possível realizar a compra.");
             System.out.println(erro.getMessage());
+        }
+    }
+
+    private static boolean desejaContinuarComprando(Scanner scanner) {
+        while (true) {
+            int resposta = lerInteiro(scanner, "Deseja continuar comprando? (1 - Sim / 0 - Não)");
+
+            if (resposta == 1) {
+                return true;
+            }
+
+            if (resposta == 0) {
+                return false;
+            }
+
+            System.out.println("Opção inválida. Digite 1 para continuar ou 0 para finalizar.");
         }
     }
 }
